@@ -16,7 +16,7 @@ class LoginController
     {
         $model = config('auth.providers.users.model');
 
-        if (str_contains($userId, '@')) {
+        if (filter_var($userId, FILTER_VALIDATE_EMAIL)) {
             $user = (new $model)->where('email', $userId)->first();
         } else {
             $user = (new $model)->find($userId);
